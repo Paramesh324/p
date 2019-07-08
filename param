@@ -1,0 +1,31 @@
+all_chars = 124
+def maxcount(str, n): 
+    count_chars = [0]*all_chars
+    for i in range(n): 
+        count_chars[ord(str[i])]+=1
+    max_count = 0
+    for i in range(all_chars):
+        if (count_chars[i]>0):
+            max_count+=1    
+    return max_count 
+  
+def smallesteSubstring(str_input): 
+    len_str = len(str_input)
+    m=len(str_input)
+    i=0
+    j=0
+    max_count = maxcount(str_input,len_str) 
+    while i<len_str: 
+        while j<len_str: 
+            substr = str_input[i:j] 
+            substr_len = len(substr) 
+            sub_char_count = maxcount(substr,substr_len) 
+            if max_count == sub_char_count and substr_len<m: 
+                m=substr_len
+            j+=1
+        i+=1
+    return m   
+
+str_input=input()
+length = smallesteSubstring(str_input)
+print(length) 
